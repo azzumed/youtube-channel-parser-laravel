@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Services\YoutubeParserService;
 use Illuminate\Console\Command;
 
 class ParseChannels extends Command
@@ -33,10 +34,13 @@ class ParseChannels extends Command
     /**
      * Execute the console command.
      *
-     * @return int
+     * @param YoutubeParserService $service
+     * @return void
      */
-    public function handle()
+    public function handle(YoutubeParserService $service)
     {
-        return 0;
+        $service->updateActiveChannelPlaylistVideos();
+
+        $this->info('Success!');
     }
 }
