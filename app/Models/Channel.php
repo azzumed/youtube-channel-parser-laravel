@@ -39,7 +39,7 @@ class Channel extends Model
 
     protected $casts = [
         'active' => 'bool',
-        'playlists_updated_at' => 'date',
+        'playlists_updated_at' => 'datetime',
     ];
 
     public function playlists()
@@ -51,7 +51,7 @@ class Channel extends Model
     {
         return $this->playlists_updated_at === null
             || (
-                $expiresAt !== null && $this->playlists_updated_at->clone()->add($expiresAt->diff(now()))->isPast()
+                $expiresAt !== null && $this->playlists_updated_at->clone()->add(now()->diff($expiresAt))->isPast()
             );
     }
 
