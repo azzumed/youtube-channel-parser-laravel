@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Madcoda\Youtube;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(Youtube::class, function ($app) {
+            return new Youtube(['key' => config('app.youtube_api_key')]);
+        });
     }
 
     /**
